@@ -15,4 +15,5 @@ dependency-reduced-pom.xml
 
 # Flink
 flink-*.jar
-log4j.properties
+log4j.propertiesout/
+out/
