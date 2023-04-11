@@ -9,9 +9,10 @@ import org.apache.flink.util.Collector;
 
 public class CountWords {
     public static void main(String[] args) throws Exception {
+        final String taskName = "Count";
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         final ParameterTool params = ParameterTool.fromArgs(args);
-        DataStream<String> dataStream = StreamUtil.getDataStream(env, params);
+        DataStream<String> dataStream = StreamUtil.getDataStream(env, params, taskName);
 
         if (dataStream == null) {
             System.exit(1);
@@ -24,7 +25,7 @@ public class CountWords {
                 .sum(1);
         wordCountStream.print();
 
-        env.execute("Count");
+        env.execute(taskName);
     }
 
     public static class WordCount implements FlatMapFunction<String, Tuple2<String, Integer>> {
